@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN"
+  "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+  <card id="main" title="Sajson WAP">
+    <p align="center">
+      <b>Witaj na stronie WAP Sajsona!</b>
+      <br />
+      <b>Jest godzina: {CZAS}</b>
+      <br />
+      Dzisiaj jest: {DATA}
+      <br />
+      Dzisiaj w Rzeszowie
+      <br />
+      jest {TEMP} stopni
+      <br />
+      {OPIS_POGODY}
+    </p>
+    <br />
+    <p align="center">Zbior dawnofonow!</p>
+    <p align="center">
+      <a href="nokia3510i/index.php">Nokia 3510i</a>
+      <b>Wiecej modeli w przygotowaniu!</b>
+    </p>
+  </card>
+</wml>
