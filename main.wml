@@ -6,15 +6,15 @@
     <p align="center">
       <b>Witaj na stronie WAP Sajsona!</b>
       <br />
-      <b>Jest godzina: {CZAS}</b>
+      <b>Jest godzina: {TIME}</b>
       <br />
-      Dzisiaj jest: {DATA}
+      Dzisiaj jest: {DATE}
       <br />
       Dzisiaj w Rzeszowie
       <br />
       jest {TEMP} stopni
       <br />
-      {OPIS_POGODY}
+      {WEATHER_DESC}
     </p>
     <br />
     <p align="center">Zbior dawnofonow!</p>

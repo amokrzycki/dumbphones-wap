@@ -1,20 +1,19 @@
 <?php
 header("Content-Type: text/vnd.wap.wml; charset=utf-8");
 
-// Detect the correct folder path for games
 $folder = __DIR__ . "/gry/";
 if (!is_dir($folder)) {
     $folder = __DIR__ . "/nokia3510i/gry/";
 }
 
-$pliki = glob($folder . "*.jad");
-if ($pliki === false) {
-    $pliki = [];
+$files = glob($folder . "*.jad");
+if ($files === false) {
+    $files = [];
 }
-sort($pliki);
+sort($files);
 
-$liczbaGier = count($pliki);
-// Number of games per page
+$countOfGames = count($files);
+
 $perPage = 5;
 
 $page = isset($_GET["page"]) ? (int) $_GET["page"] : 1;
@@ -22,7 +21,7 @@ if ($page < 1) {
     $page = 1;
 }
 
-$totalPages = (int) ceil($liczbaGier / $perPage);
+$totalPages = (int) ceil($countOfGames / $perPage);
 if ($totalPages < 1) {
     $totalPages = 1;
 }
@@ -31,20 +30,20 @@ if ($page > $totalPages) {
 }
 
 $offset = ($page - 1) * $perPage;
-$plikiStrony = array_slice($pliki, $offset, $perPage);
+$pageFiles = array_slice($files, $offset, $perPage);
 
-$listaGier = "";
-foreach ($plikiStrony as $plik) {
-    $nazwa = basename($plik, ".jad");
-    $listaGier .= "<a href=\"gry/{$nazwa}.jad\">{$nazwa}</a><br/>\n";
+$gamesList = "";
+foreach ($pageFiles as $file) {
+    $name = basename($file, ".jad");
+    $gamesList .= "<a href=\"gry/{$name}.jad\">{$name}</a><br/>\n";
 }
 
-if (empty($pliki)) {
-    $listaGier = "Brak gier w katalogu.<br/>";
+if (empty($files)) {
+    $gamesList = "Brak gier w katalogu.<br/>";
 } else {
     // Add pagination controls if there is more than one page
     if ($totalPages > 1) {
-        $listaGier .= "<br/>Strona {$page} z {$totalPages}<br/>\n";
+        $gamesList .= "<br/>Strona {$page} z {$totalPages}<br/>\n";
         $links = [];
         if ($page > 1) {
             $prev = $page - 1;
@@ -54,12 +53,12 @@ if (empty($pliki)) {
             $next = $page + 1;
             $links[] = "<a href=\"gry.php?page={$next}\">Nastepna &gt;</a>";
         }
-        $listaGier .= implode(" | ", $links) . "<br/>\n";
+        $gamesList .= implode(" | ", $links) . "<br/>\n";
     }
 }
 
-$szablon = file_get_contents(__DIR__ . "/gry.wml");
-echo strtr($szablon, [
-    "{LICZBA_GIER}" => $liczbaGier,
-    "{LISTA_GIER}" => $listaGier,
+$template = file_get_contents(__DIR__ . "/gry.wml");
+echo strtr($template, [
+    "{COUNT_OF_GAMES}" => $countOfGames,
+    "{GAMES_LIST}" => $gamesList,
 ]);

@@ -3,8 +3,8 @@
   "http://www.wapforum.org/DTD/wml_1.1.xml">
 <wml>
   <card id="gry" title="Lista gier">
-    <p align="center">Dostepnych gier: {LICZBA_GIER}</p>
-    <p align="center">{LISTA_GIER}</p>
+    <p align="center">Dostepnych gier: {COUNT_OF_GAMES}</p>
+    <p align="center">{GAMES_LIST}</p>
     <p align="center">
       <a href="index.php">
         &lt; Powrot
