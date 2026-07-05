@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<!DOCTYPE wml PUBLIC "-//WAPFORUM//DTD WML 1.1//EN"
+  "http://www.wapforum.org/DTD/wml_1.1.xml">
+<wml>
+  <card id="main" title="Nokia 6310i">
+    <p align="center">
+      <b>Tu znajdziesz wszystko</b>
+      <b>dla swojej kochanej 6310i!</b>
+    </p>
+    <p align="center">
+      <a href="gry.php">Gry</a>
+    </p>
+    <a href="/index.php">
+      &lt; Powrot
+    </a>
+  </card>
+</wml>
