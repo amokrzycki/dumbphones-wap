@@ -39,8 +39,8 @@ $date = date("d.m.Y");
 
 $template = file_get_contents(__DIR__ . "/main.wml");
 echo strtr($template, [
-    "{CZAS}" => $time,
-    "{DATA}" => $date,
+    "{TIME}" => $time,
+    "{DATE}" => $date,
     "{TEMP}" => $temp,
-    "{OPIS_POGODY}" => descWeather($wcode),
+    "{WEATHER_DESC}" => descWeather($wcode),
 ]);

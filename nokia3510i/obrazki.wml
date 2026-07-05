@@ -3,8 +3,8 @@
   "http://www.wapforum.org/DTD/wml_1.1.xml">
 <wml>
   <card id="main" title="Obrazki 3510i">
-    <p align="center">Dostepnych obrazkow: {LICZBA_OBRAZKOW}</p>
-    <p align="center">{LISTA_OBRAZKOW}</p>
+    <p align="center">Dostepnych obrazkow: {COUNT_OF_PICS}</p>
+    <p align="center">{PICS_LIST}</p>
     <p align="center">
       <a href="index.php">
         &lt; Powrot

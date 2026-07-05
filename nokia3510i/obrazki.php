@@ -1,23 +1,22 @@
 <?php
 header("Content-Type: text/vnd.wap.wml; charset=utf-8");
 
-// Detect the correct folder path for images
 $folder = __DIR__ . "/obrazki/";
 if (!is_dir($folder)) {
     $folder = __DIR__ . "/nokia3510i/obrazki/";
 }
 
-$pliki = glob(
+$files = glob(
     $folder . "*.{jpg,jpeg,png,gif,bmp,JPG,JPEG,PNG,GIF,BMP}",
     GLOB_BRACE,
 );
-if ($pliki === false) {
-    $pliki = [];
+if ($files === false) {
+    $files = [];
 }
-sort($pliki);
+sort($files);
 
-$liczbaObrazkow = count($pliki);
-// Number of images per page
+$countOfPics = count($files);
+
 $perPage = 5;
 
 $page = isset($_GET["page"]) ? (int) $_GET["page"] : 1;
@@ -25,7 +24,7 @@ if ($page < 1) {
     $page = 1;
 }
 
-$totalPages = (int) ceil($liczbaObrazkow / $perPage);
+$totalPages = (int) ceil($countOfPics / $perPage);
 if ($totalPages < 1) {
     $totalPages = 1;
 }
@@ -34,22 +33,22 @@ if ($page > $totalPages) {
 }
 
 $offset = ($page - 1) * $perPage;
-$plikiStrony = array_slice($pliki, $offset, $perPage);
+$pageFiles = array_slice($files, $offset, $perPage);
 
-$listaObrazkow = "";
-foreach ($plikiStrony as $plik) {
-    $nazwa = basename($plik);
-    $nazwaBezRoz = pathinfo($plik, PATHINFO_FILENAME);
-    $urlEncoded = rawurlencode($nazwa);
-    $listaObrazkow .= "<a href=\"obrazki/{$urlEncoded}\">{$nazwaBezRoz}</a><br/>\n";
+$picsList = "";
+foreach ($pageFiles as $plik) {
+    $name = basename($plik);
+    $nameWithoutExt = pathinfo($plik, PATHINFO_FILENAME);
+    $urlEncoded = rawurlencode($name);
+    $picsList .= "<a href=\"obrazki/{$urlEncoded}\">{$nameWithoutExt}</a><br/>\n";
 }
 
-if (empty($pliki)) {
-    $listaObrazkow = "Brak obrazkow w katalogu.<br/>";
+if (empty($files)) {
+    $picsList = "Brak obrazkow w katalogu.<br/>";
 } else {
     // Add pagination controls if there is more than one page
     if ($totalPages > 1) {
-        $listaObrazkow .= "<br/>Strona {$page} z {$totalPages}<br/>\n";
+        $picsList .= "<br/>Strona {$page} z {$totalPages}<br/>\n";
         $links = [];
         if ($page > 1) {
             $prev = $page - 1;
@@ -59,12 +58,12 @@ if (empty($pliki)) {
             $next = $page + 1;
             $links[] = "<a href=\"obrazki.php?page={$next}\">Nastepna &gt;</a>";
         }
-        $listaObrazkow .= implode(" | ", $links) . "<br/>\n";
+        $picsList .= implode(" | ", $links) . "<br/>\n";
     }
 }
 
-$szablon = file_get_contents(__DIR__ . "/obrazki.wml");
-echo strtr($szablon, [
-    "{LICZBA_OBRAZKOW}" => $liczbaObrazkow,
-    "{LISTA_OBRAZKOW}" => $listaObrazkow,
+$template = file_get_contents(__DIR__ . "/obrazki.wml");
+echo strtr($template, [
+    "{COUNT_OF_PICS}" => $countOfPics,
+    "{PICS_LIST}" => $picsList,
 ]);
