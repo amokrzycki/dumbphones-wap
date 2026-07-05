@@ -1,6 +1,8 @@
 <?php
 header("Content-Type: text/vnd.wap.wml; charset=utf-8");
 
+date_default_timezone_set("Europe/Warsaw");
+
 $lat = 50.03;
 $lon = 22.04;
 $url = "https://api.open-meteo.com/v1/forecast?latitude={$lat}&longitude={$lon}&current_weather=true";
