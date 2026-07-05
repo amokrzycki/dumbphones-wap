@@ -29,7 +29,7 @@ function descWeather($code)
         71 => "Snieg",
         95 => "Burza",
     ];
-    return $mapa[$code] ?? "Brak danych";
+    return $mapa[$code] ?? "";
 }
 
 $time = date("H:i:s");
