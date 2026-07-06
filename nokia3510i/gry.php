@@ -35,7 +35,8 @@ $pageFiles = array_slice($files, $offset, $perPage);
 $gamesList = "";
 foreach ($pageFiles as $file) {
     $name = basename($file, ".jad");
-    $gamesList .= "<a href=\"gry/{$name}.jad\">{$name}</a><br/>\n";
+    $safeName = htmlspecialchars($name, ENT_XML1 | ENT_QUOTES, "UTF-8");
+    $gamesList .= "<a href=\"gry/{$safeName}.jad\">{$safeName}</a><br/>\n";
 }
 
 if (empty($files)) {
